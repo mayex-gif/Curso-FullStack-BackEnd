@@ -1,77 +1,98 @@
-const express = require('express')  
-const dotenv = require('dotenv')
+const express = require("express");
 
-//Iniciamos la configuracion de las variables de entorno
-dotenv.config()
-
-//Método dos de configuracion de variables de entorno
-//require('datenv').config()
-
-
-const app = express()
+const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.get("/", (req, res) => {
+  res.send(`<nav 
+            style="width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;">
+                <a href='./'>Start</a>
+                <a href='./send'>Form</a>
+                <a href='./redirect'>Redirect</a>
+            </nav>
 
-app.get('/', (req, res) => {
-    console.log("========================================================================")
-    console.log(process.env);
-    console.log("========================================================================")
-
-    //Imprimimos en consulta las variables de entorno agregadas
-    console.log(procces.env.PORT)
-    console.log(process.env.PASSWORD)
-    console.log(process.env.PASSWORD_GOOGLE)
-
-    console.log("========================================================================")
-
-    res.send('Yo de nuevo saludad');
-    console.log('doc enviado')
-
-    //Respuestas que podemos procesar con express
-    // res.send()
-    // res.end()
-    // res.redirect()
-    // res.json()
-    // res.status()
-    // res.render()
-    // res.sendfile()
-    // res.download
-})
+            <h1>BIENVENIDOS...</h1>`
+)});
 
 
+app.get("/send", function (req, res) {
+  console.log("========================================================================")
+  console.log(req.url);
+  console.log("========================================================================")
 
-//send
+  res.send(`<nav 
+            style="width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;">
+                <a href='./'>Start</a>
+                <a href='./send'>Form</a>
+                <a href='./redirect'>Redirect</a>
+            </nav>
+                
+            <br><br>
+                
+            <div 
+            style="display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;">
+                <form method="post"
+                style="display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 30px;">
+                  
+                    <label for="username"
+                    style="margin-bottom: 5px;
+                    color: #DA5552">Usuario:</label>
+                        
+                    <input type="text" id="username" name="username" autofocus required
+                    style="padding: 10px;
+                    margin-bottom: 15px;
+                    border: 1px solid #DA5552;
+                    border-radius: 4px;"><br>
+                        
+                    <label for="password"
+                    style="margin-bottom: 5px;
+                    color: #DA5552">Contraseña:</label>
+                        
+                        
+                    <input type="password" id="password" name="password" minlength="8" required
+                    style="padding: 10px;
+                    margin-bottom: 15px;
+                    border: 1px solid #DA5552;
+                    border-radius: 4px;"><br>
 
-app.get('/send', function (req, res) {
-            console.log("========================================================================")
-            console.log(req.env);
-            console.log("========================================================================")
-
-            res.send(`
-                <form>
-                    <p>
-                        Ingresa tu nombre completo: 
-                        <input type = "text" name = "nombrecompleto">
-                        <input type = "submit" value = "Enviar la información">
-                        <input type = "reset" value = "Eliminar datos">
-                    </p>
+                    <button type="submit"
+                    style="background-color: #DF7373;
+                    color: white;
+                    padding: 10px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;">Iniciar Sesión</button><br>
+                      
                 </form>
-                `)
+            <div>`
+)})
 
-            // res.sendFile(__dirname + '/index.html')
-            // res.sendFile(__dirname + '/index.
+
+app.get("/redirect", (req, res) => {
+  console.log("========================================================================");
+  console.log(req.url);
+  console.log("========================================================================");
+
+  res.redirect("./")
 })
+
 
 app.listen(PORT, (err) => {
-    if (err) console.log(err);
+  if (err) console.log(err);
 
-    console.log(`Servidor corriendo en http://localhost:${PORT}`)
-})
-
-app.get('/download', (req, res) => {
-    console.log("========================================================================")
-    console.log(req.url);
-    console.log("========================================================================")
-
-    res.download('./file.txt')
+  console.log(`Servidor corriendo en http://localhost:${PORT}`)
 })
