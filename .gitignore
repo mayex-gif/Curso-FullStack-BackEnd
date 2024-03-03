@@ -1,0 +1,4 @@
+# Ignorar las siguientes carpetas y archivos cuando se ejecute "git add":
+
+## Ignorar 'node_modules'
+/node_modules/
